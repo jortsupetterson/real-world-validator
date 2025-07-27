@@ -1,7 +1,3 @@
-/**
- * Yleinen merkkijonon siistijä: trim, kollapsoi whitespace, poista kontrollimerkit, rajoita pituus.
- * Tämä EI ole HTML-escape – käytä `escapeHTML` sitä varten.
- */
 export function sanitizeString(input, opts = {}) {
   const {
     trim = true,
@@ -20,10 +16,6 @@ export function sanitizeString(input, opts = {}) {
   return s;
 }
 
-/**
- * HTML-escape (XSS-suoja tulostusvaiheessa).
- * Käytä, kun tuotat arvoja suoraan HTML:ään.
- */
 export function escapeHTML(input) {
   return String(input ?? "")
     .replace(/&/g, "&amp;")

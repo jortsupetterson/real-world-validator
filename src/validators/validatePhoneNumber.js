@@ -13,6 +13,7 @@
  * - Presentation with a leading **'+' (U+002B)** denotes a globalized number.
  * - No spaces, dashes, parentheses, extensions, or short codes.
  */
+
 export const RE_PHONE_PLUS_3_9 = /^\+[1-9]\d{2}\d{9}$/;
 
 /**
@@ -26,6 +27,7 @@ export const RE_PHONE_PLUS_3_9 = /^\+[1-9]\d{2}\d{9}$/;
  * @param {string} value Phone number string, e.g. "+358401234567".
  * @returns {boolean} `true` when the value matches the strict pattern.
  */
+
 export function validatePhoneNumber(value) {
   if (typeof value !== "string") return false;
 

@@ -28,6 +28,7 @@
  *   user@-bad-.example            // invalid LDH placement
  *   verylonglocal...              // exceeds 64 / 254 limits
  */
+
 export const RE_EMAIL_ADDRESS_LATIN =
   /^(?=.{1,254}$)(?=^[^@]{1,64}@)(?:[A-Za-z0-9\u00C0-\u024F\u1E00-\u1EFF_%+'-]+(?:\.[A-Za-z0-9\u00C0-\u024F\u1E00-\u1EFF_%+'-]+)*)@(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+(?:[A-Za-z]{2,63}|xn--[A-Za-z0-9-]{2,59})$/;
 
@@ -42,6 +43,7 @@ export const RE_EMAIL_ADDRESS_LATIN =
  * @returns {boolean} `true` if valid; otherwise `false`.
  * @throws {TypeError} When `value` is not a string.
  */
+
 export function validateEmailAddress(value) {
   if (typeof value !== "string")
     throw new TypeError("Email address must be a string");

@@ -62,6 +62,7 @@ import { validatePhoneNumber } from "./validators/validatePhoneNumber.js";
  * Add new handlers here (e.g. `"url"`, `"password"`) and widen the JSDoc unions.
  * @type {Record<string, Function>}
  */
+
 const handlers = {
   properName: validateProperName,
   emailAddress: validateEmailAddress,
@@ -71,6 +72,7 @@ const handlers = {
 };
 
 /** @preserve */
+
 const ERROR_CODE = {
   properName: "invalidProperName",
   emailAddress: "invalidEmailAddress",
@@ -107,18 +109,23 @@ const ERROR_CODE = {
  * @returns {Promise<Outcome[]>} Outcomes in the same order as input rules.
  * @throws {TypeError} When `fields` is not an array.
  */
+
 export default async function validate(fields) {
   if (!Array.isArray(fields)) {
     throw new TypeError("fields must be an array of rule objects");
   }
 
   /** @type {Outcome[]} */
+
   const out = [];
 
   for (const f of fields) {
-    const type = String(f?.type ?? ""); // keep camelCase as provided
+    const type = String(f?.type ?? "");
     const value = String(f?.value ?? "");
-    const fn = /** @type {Function|undefined} */ (handlers[type]);
+
+    /** @type {Function|undefined} */ 
+
+    const fn = (handlers[type]);
     let ok = false;
 
     try {
@@ -143,6 +150,7 @@ export default async function validate(fields) {
 }
 
 /** @preserve Re‑exports for direct, granular imports. */
+
 export {
   validateProperName,
   validateEmailAddress,
