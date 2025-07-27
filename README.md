@@ -1,3 +1,7 @@
+# v 1.0.6
+
+fking comments man, contact me if you know how to avoid this mistake in esbuild
+
 # v 1.0.5
 Updated proper name to only accept values with first letter in uppercase and the letter after - if there is a -
 
