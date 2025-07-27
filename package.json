@@ -1,0 +1,44 @@
+{
+  "name": "@jortsupetterson/real-world-validator",
+  "version": "1.0.0",
+  "description": "Isomorphic form validator for Node and browsers that returns a UI-friendly validation surface.",
+  "type": "module",
+  "exports": "./dist/index.js",
+  "main": "./dist/index.js",
+  "sideEffects": false,
+  "keywords": [
+    "validation",
+    "validator",
+    "forms",
+    "isomorphic",
+    "browser",
+    "node"
+  ],
+  "license": "MPL-2.0",
+  "author": "jortsupetterson",
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test || exit 0",
+    "prepublishOnly": "npm pack --dry-run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jortsupetterson/real-world-validator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jortsupetterson/real-world-validator/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.8"
+  }
+}

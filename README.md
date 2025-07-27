@@ -1,0 +1,1 @@
+Use when validati forms or any input both at client for reducing request and server incase of client abuse
