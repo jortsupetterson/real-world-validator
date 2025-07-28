@@ -1,6 +1,7 @@
 /**
  * @preserve
  * @typedef {Object} PhoneNumberField
+ * @property {string}             id
  * @property {'phoneNumber'}      type            - Field type
  * @property {boolean}            required        - Whether the field is required
  * @property {string}             value           - Raw input value
@@ -31,15 +32,15 @@ const MESSAGES = {
  * @returns {{type: string, ok: boolean, message: string}}
  */
 export function validatePhoneNumber(field, lang = "en") {
-  const { type, value, successMessage, errorMessage } = field;
+  const { id, value, successMessage, errorMessage } = field;
 
   if (typeof value !== "string") {
     throw new TypeError("Phone number must be a string");
   }
   if (value.length !== 13 || value.charCodeAt(0) !== 0x2b /* '+' */) {
     return {
-      type,
-      ok: false,
+      id: id,
+      status: false,
       message: errorMessage || MESSAGES.invalid[lang],
     };
   }
@@ -47,8 +48,8 @@ export function validatePhoneNumber(field, lang = "en") {
   const isValid = RE_PHONE_PLUS_3_9.test(value);
 
   return {
-    type,
-    ok: isValid,
+    id: id,
+    status: isValid,
     message: isValid
       ? successMessage || MESSAGES.valid[lang]
       : errorMessage || MESSAGES.invalid[lang],

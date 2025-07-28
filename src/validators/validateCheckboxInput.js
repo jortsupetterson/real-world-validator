@@ -1,6 +1,7 @@
 /**
  * @preserve
  * @typedef {Object} CheckboxInputField
+ * @property {string}             id
  * @property {'checkboxInput'}     type            - Field type
  * @property {boolean}             required        - Whether the field is required
  * @property {boolean}             value           - Raw input value
@@ -30,7 +31,7 @@ const MESSAGES = {
  * @returns {{type: string, ok: boolean, message: string}}
  */
 export function validateCheckboxInput(field, lang = "en") {
-  const { type, required, value, successMessage, errorMessage } = field;
+  const { id, required, value, successMessage, errorMessage } = field;
   if (typeof value !== "boolean") {
     throw new TypeError("Checkbox value must be a boolean");
   }
@@ -41,8 +42,8 @@ export function validateCheckboxInput(field, lang = "en") {
   }
 
   return {
-    type,
-    ok: isValid,
+    id: id,
+    status: isValid,
     message: isValid
       ? successMessage || MESSAGES.valid[lang]
       : errorMessage || MESSAGES.invalid[lang],

@@ -32,8 +32,8 @@ export default async function validate(fields, lang = "en") {
     const response = fn(field, lang);
 
     outcome.push({
-      type: response.type,
-      ok: response.ok,
+      id: response.id,
+      status: response.status,
       message: response.message,
     });
   }

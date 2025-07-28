@@ -1,6 +1,7 @@
 /**
  * @preserve
  * @typedef {Object} ProperNameField
+ * @property {string}             id
  * @property {'properName'}        type
  * @property {boolean}             required
  * @property {string}              value
@@ -15,7 +16,7 @@
  */
 
 export function validateProperName(field, lang = "en") {
-  const { type, value, successMessage, errorMessage } = field;
+  const { id, value, successMessage, errorMessage } = field;
   if (typeof value !== "string") {
     throw new TypeError("Name must be a string");
   }
@@ -24,8 +25,8 @@ export function validateProperName(field, lang = "en") {
   const isValid = RE_PROPER_NAME_LATIN.test(s);
 
   return {
-    type,
-    ok: isValid,
+    id: id,
+    status: isValid,
     message: isValid
       ? successMessage || MESSAGES.valid[lang]
       : errorMessage || MESSAGES.invalid[lang],

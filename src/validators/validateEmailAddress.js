@@ -1,6 +1,7 @@
 /**
  * @preserve
  * @typedef {Object} EmailAddressField
+ * @property {string}             id
  * @property {'emailAddress'}       type
  * @property {boolean}              required
  * @property {string}               value
@@ -32,7 +33,7 @@ const MESSAGES = {
  * @returns {{type: string, ok: boolean, message: string}}
  */
 export function validateEmailAddress(field, lang = "en") {
-  const { type, value, successMessage, errorMessage } = field;
+  const { id, value, successMessage, errorMessage } = field;
   if (typeof value !== "string") {
     throw new TypeError("Email address must be a string");
   }
@@ -41,8 +42,8 @@ export function validateEmailAddress(field, lang = "en") {
   const isValid = RE_EMAIL_ADDRESS_LATIN.test(s);
 
   return {
-    type,
-    ok: isValid,
+    id: id,
+    status: isValid,
     message: isValid
       ? successMessage || MESSAGES.valid[lang]
       : errorMessage || MESSAGES.invalid[lang],
