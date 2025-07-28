@@ -15,30 +15,33 @@
  * @returns {{type: string, ok: boolean, message: string}}
  */
 function validateProperName(field, lang = "en") {
-  const { type: type2, value, successMessage, errorMessage } = field;
+  const { type, value, successMessage, errorMessage } = field;
   if (typeof value !== "string") {
     throw new TypeError("Name must be a string");
   }
   const s = value.normalize("NFC").trim();
   const isValid = RE_PROPER_NAME_LATIN.test(s);
   return {
-    type: type2,
+    type,
     ok: isValid,
-    message: isValid ? successMessage || MESSAGES.valid[lang] : errorMessage || MESSAGES.invalid[lang]
+    message: isValid
+      ? successMessage || MESSAGES.valid[lang]
+      : errorMessage || MESSAGES.invalid[lang],
   };
 }
-var RE_PROPER_NAME_LATIN = /^(?=.{1,64}$)(?:[A-Z\u00C0-\u00D6\u00D8-\u00DE\u1E00-\u1EFF][A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F\u1E00-\u1EFF]*)(?:[-\u2010\u2011'’][A-Z\u00C0-\u00D6\u00D8-\u00DE\u1E00-\u1EFF][A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F\u1E00-\u1EFF]*)?$/;
+var RE_PROPER_NAME_LATIN =
+  /^(?=.{1,64}$)(?:[A-Z\u00C0-\u00D6\u00D8-\u00DE\u1E00-\u1EFF][A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F\u1E00-\u1EFF]*)(?:[-\u2010\u2011'’][A-Z\u00C0-\u00D6\u00D8-\u00DE\u1E00-\u1EFF][A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F\u1E00-\u1EFF]*)?$/;
 var MESSAGES = {
   valid: {
     fi: "Nimi on kelvollinen.",
     sv: "Namnet \xE4r giltigt.",
-    en: "The name is valid."
+    en: "The name is valid.",
   },
   invalid: {
     fi: "Nimen tulee alkaa isolla kirjaimella ja olla muodossa 'Esimerkki' tai 'Esimerkki-Esimerkki'.",
     sv: "Namnet m\xE5ste b\xF6rja med en stor bokstav och vara i formen 'Exempel' eller 'Exempel-Exempel'.",
-    en: "The name must start with a capital letter and be in the form 'Example' or 'Example-Example'."
-  }
+    en: "The name must start with a capital letter and be in the form 'Example' or 'Example-Example'.",
+  },
 };
 
 // src/validators/validateEmailAddress.js
@@ -51,30 +54,33 @@ var MESSAGES = {
  * @property {string}              [successMessage]
  * @property {string}              [errorMessage]
  */
-var RE_EMAIL_ADDRESS_LATIN = /^(?=.{1,254}$)(?=^[^@]{1,64}@)(?:[A-Za-z0-9\u00C0-\u024F\u1E00-\u1EFF_%+'-]+(?:\.[A-Za-z0-9\u00C0-\u024F\u1E00-\u1EFF_%+'-]+)*)@(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+(?:[A-Za-z]{2,63}|xn--[A-Za-z0-9-]{2,59})$/;
+var RE_EMAIL_ADDRESS_LATIN =
+  /^(?=.{1,254}$)(?=^[^@]{1,64}@)(?:[A-Za-z0-9\u00C0-\u024F\u1E00-\u1EFF_%+'-]+(?:\.[A-Za-z0-9\u00C0-\u024F\u1E00-\u1EFF_%+'-]+)*)@(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+(?:[A-Za-z]{2,63}|xn--[A-Za-z0-9-]{2,59})$/;
 var MESSAGES2 = {
   valid: {
     fi: "S\xE4hk\xF6postiosoite on kelvollinen.",
     sv: "E-postadressen \xE4r giltig.",
-    en: "The email address is valid."
+    en: "The email address is valid.",
   },
   invalid: {
     fi: "S\xE4hk\xF6postiosoitteen on oltava muodossa 'user@example.com'.",
     sv: "E-postadressen m\xE5ste vara i formen 'user@example.com'.",
-    en: "The email address must be in the form 'user@example.com'."
-  }
+    en: "The email address must be in the form 'user@example.com'.",
+  },
 };
 function validateEmailAddress(field, lang = "en") {
-  const { type: type2, value, successMessage, errorMessage } = field;
+  const { type, value, successMessage, errorMessage } = field;
   if (typeof value !== "string") {
     throw new TypeError("Email address must be a string");
   }
   const s = value.trim();
   const isValid = RE_EMAIL_ADDRESS_LATIN.test(s);
   return {
-    type: type2,
+    type,
     ok: isValid,
-    message: isValid ? successMessage || MESSAGES2.valid[lang] : errorMessage || MESSAGES2.invalid[lang]
+    message: isValid
+      ? successMessage || MESSAGES2.valid[lang]
+      : errorMessage || MESSAGES2.invalid[lang],
   };
 }
 
@@ -93,13 +99,13 @@ var MESSAGES3 = {
   valid: {
     fi: "Puhelinnumero on kelvollinen.",
     sv: "Telefonnumret \xE4r giltigt.",
-    en: "The phone number is valid."
+    en: "The phone number is valid.",
   },
   invalid: {
     fi: "Puhelinnumeron on oltava muodossa '+123123456789' (kolme numeroa maatunnus ja yhdeks\xE4n numeroa).",
     sv: "Telefonnumret m\xE5ste vara i formen '+123123456789' (tre siffror landskod och nio siffror).",
-    en: "The phone number must be in the format '+123123456789' (three-digit country code and nine digits)."
-  }
+    en: "The phone number must be in the format '+123123456789' (three-digit country code and nine digits).",
+  },
 };
 /**
  * Validates an international phone number in the format +CCCNNNNNNNNN.
@@ -109,22 +115,24 @@ var MESSAGES3 = {
  * @returns {{type: string, ok: boolean, message: string}}
  */
 function validatePhoneNumber(field, lang = "en") {
-  const { type: type2, value, successMessage, errorMessage } = field;
+  const { type, value, successMessage, errorMessage } = field;
   if (typeof value !== "string") {
     throw new TypeError("Phone number must be a string");
   }
   if (value.length !== 13 || value.charCodeAt(0) !== 43) {
     return {
-      type: type2,
+      type,
       ok: false,
-      message: errorMessage || MESSAGES3.invalid[lang]
+      message: errorMessage || MESSAGES3.invalid[lang],
     };
   }
   const isValid = RE_PHONE_PLUS_3_9.test(value);
   return {
-    type: type2,
+    type,
     ok: isValid,
-    message: isValid ? successMessage || MESSAGES3.valid[lang] : errorMessage || MESSAGES3.invalid[lang]
+    message: isValid
+      ? successMessage || MESSAGES3.valid[lang]
+      : errorMessage || MESSAGES3.invalid[lang],
   };
 }
 
@@ -142,13 +150,13 @@ var MESSAGES4 = {
   valid: {
     fi: "Valintaruutu on valittu.",
     sv: "Kryssrutan \xE4r markerad.",
-    en: "The checkbox is checked."
+    en: "The checkbox is checked.",
   },
   invalid: {
     fi: "T\xE4m\xE4 valintaruutu on pakollinen ja sen on oltava valittuna.",
     sv: "Den h\xE4r kryssrutan \xE4r obligatorisk och m\xE5ste vara markerad.",
-    en: "This checkbox is required and must be checked."
-  }
+    en: "This checkbox is required and must be checked.",
+  },
 };
 /**
  * @preserve
@@ -159,15 +167,20 @@ var MESSAGES4 = {
  * @returns {{type: string, ok: boolean, message: string}}
  */
 function validateCheckboxInput(field, lang = "en") {
-  const { type: type2, required, value, successMessage, errorMessage } = field;
+  const { type, required, value, successMessage, errorMessage } = field;
   if (typeof value !== "boolean") {
     throw new TypeError("Checkbox value must be a boolean");
   }
-  const isValid = required ? value === true : true;
+  let isValid = true;
+  if (required === true && value === false) {
+    isValid = false;
+  }
   return {
-    type: type2,
+    type,
     ok: isValid,
-    message: isValid ? successMessage || MESSAGES4.valid[lang] : errorMessage || MESSAGES4.invalid[lang]
+    message: isValid
+      ? successMessage || MESSAGES4.valid[lang]
+      : errorMessage || MESSAGES4.invalid[lang],
   };
 }
 
@@ -191,7 +204,7 @@ function sanitizeString(input, opts = {}) {
     trim = true,
     collapseWhitespace = true,
     stripControls = true,
-    maxLen = 4096
+    maxLen = 4096,
   } = opts;
   let s = String(input ?? "");
   if (trim) s = s.trim();
@@ -208,7 +221,12 @@ function sanitizeString(input, opts = {}) {
  * @returns {string}
  */
 function escapeHTML(input) {
-  return String(input ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  return String(input ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 // src/index.js
@@ -218,12 +236,12 @@ var handlers = {
   phoneNumber: validatePhoneNumber,
   checkboxInput: validateCheckboxInput,
   string: sanitizeString,
-  html: escapeHTML
+  html: escapeHTML,
 };
 /**
  * @preserve
- * @param {Rule[]} fields  - Array of validation rules
- * @param {string}  lang    - Two letter language code
+ * @param {Rule[]}  fields - Array of validation rules
+ * @param {string}  lang   - Two letter language code
  * @returns {Promise<Outcome[]>}
  */
 async function validate(fields, lang = "en") {
@@ -232,18 +250,12 @@ async function validate(fields, lang = "en") {
   }
   const outcome = [];
   for (const field of fields) {
-    const fn = handlers[type];
-    let ok = false;
-    try {
-      ok = typeof fn === "function" ? !!fn(field, lang) : false;
-    } catch {
-      ok = false;
-    }
-    out.push({
-      type,
-      ok,
-      message: ok ? f?.successMessage : f?.errorMessage,
-      code: fn ? ok : "unknownType"
+    const fn = handlers[field.type];
+    const response = fn(field, lang);
+    outcome.push({
+      type: response.type,
+      ok: response.ok,
+      message: response.message,
     });
   }
   return outcome;
@@ -252,7 +264,8 @@ export {
   validate as default,
   escapeHTML,
   sanitizeString,
+  validateCheckboxInput,
   validateEmailAddress,
   validatePhoneNumber,
-  validateProperName
+  validateProperName,
 };

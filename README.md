@@ -1,3 +1,7 @@
+# v 1.1.2
+
+Had to fix AIs bullshit code...
+
 # v 1.1.1
 
 My dumbass forgot to import the checkbox module

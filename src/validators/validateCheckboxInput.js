@@ -35,7 +35,10 @@ export function validateCheckboxInput(field, lang = "en") {
     throw new TypeError("Checkbox value must be a boolean");
   }
 
-  const isValid = required ? value === true : true;
+  let isValid = true;
+  if (required === true && value === false) {
+    isValid = false;
+  }
 
   return {
     type,

@@ -15,8 +15,8 @@ const handlers = {
 
 /**
  * @preserve
- * @param {Rule[]} fields  - Array of validation rules
- * @param {string}  lang    - Two letter language code
+ * @param {Rule[]}  fields - Array of validation rules
+ * @param {string}  lang   - Two letter language code
  * @returns {Promise<Outcome[]>}
  */
 export default async function validate(fields, lang = "en") {
@@ -27,20 +27,14 @@ export default async function validate(fields, lang = "en") {
   const outcome = [];
 
   for (const field of fields) {
-    const fn = handlers[type];
-    let ok = false;
+    const fn = handlers[field.type];
 
-    try {
-      ok = typeof fn === "function" ? !!fn(field, lang) : false;
-    } catch {
-      ok = false;
-    }
+    const response = fn(field, lang);
 
-    out.push({
-      type,
-      ok,
-      message: ok ? f?.successMessage : f?.errorMessage,
-      code: fn ? ok : "unknownType",
+    outcome.push({
+      type: response.type,
+      ok: response.ok,
+      message: response.message,
     });
   }
 
@@ -51,6 +45,7 @@ export {
   validateProperName,
   validateEmailAddress,
   validatePhoneNumber,
+  validateCheckboxInput,
   sanitizeString,
   escapeHTML,
 };
