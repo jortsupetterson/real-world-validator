@@ -7,5 +7,4 @@ build({
   outfile: "./index.js",
   legalComments: "inline",
   bundle: true,
-  keepNames: true,
 });

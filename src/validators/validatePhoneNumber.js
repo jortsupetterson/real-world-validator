@@ -1,41 +1,55 @@
-// validators/validatePhoneNumber.js
-
-/*! @preserve
- * Strict E.164-like validator: one **global** number in the form
- *   "+" CC NNNNNNNNN
- * where CC is a 3‑digit country code (first digit 1–9) and the subscriber
- * part is 9 digits. Total length is exactly **13 characters** including '+'.
- *
- * This is a deliberate, fast subset of E.164:
- * - E.164 limits numbers to digits with a **maximum of 15 digits** and a
- *   country code of **1–3 digits**. We freeze it to 3+9 for simplicity,
- *   routing stability and UI constraints.
- * - Presentation with a leading **'+' (U+002B)** denotes a globalized number.
- * - No spaces, dashes, parentheses, extensions, or short codes.
+/**
+ * @typedef {Object} PhoneNumberField
+ * @property {'phoneNumber'}      type            - Field type
+ * @property {boolean}            required        - Whether the field is required
+ * @property {string}             value           - Raw input value
+ * @property {string}            [successMessage] - Override for success message
+ * @property {string}            [errorMessage]   - Override for error message
  */
 
 export const RE_PHONE_PLUS_3_9 = /^\+[1-9]\d{2}\d{9}$/;
 
+const MESSAGES = {
+  valid: {
+    fi: "Puhelinnumero on kelvollinen.",
+    sv: "Telefonnumret är giltigt.",
+    en: "The phone number is valid.",
+  },
+  invalid: {
+    fi: "Puhelinnumeron on oltava muodossa '+123123456789' (kolme numeroa maatunnus ja yhdeksän numeroa).",
+    sv: "Telefonnumret måste vara i formen '+123123456789' (tre siffror landskod och nio siffror).",
+    en: "The phone number must be in the format '+123123456789' (three-digit country code and nine digits).",
+  },
+};
+
 /**
- * Validate a phone number in the fixed global format: `+CCCNNNNNNNNN`.
+ * Validates an international phone number in the format +CCCNNNNNNNNN.
  *
- * Fast reject path avoids running the regex on obvious junk:
- *  - require string type
- *  - exact length check (13)
- *  - first character must be '+' (U+002B)
- *
- * @param {string} value Phone number string, e.g. "+358401234567".
- * @returns {boolean} `true` when the value matches the strict pattern.
+ * @param {PhoneNumberField}        field - A config Object
+ * @param {'fi'|'sv'|'en'}          lang  - Two letter language code
+ * @returns {{type: string, ok: boolean, message: string}}
  */
+export function validatePhoneNumber(field, lang = "en") {
+  const { type, value, successMessage, errorMessage } = field;
 
-export function validatePhoneNumber(value) {
-  if (typeof value !== "string") return false;
+  if (typeof value !== "string") {
+    throw new TypeError("Phone number must be a string");
+  }
+  if (value.length !== 13 || value.charCodeAt(0) !== 0x2b /* '+' */) {
+    return {
+      type,
+      ok: false,
+      message: errorMessage || MESSAGES.invalid[lang],
+    };
+  }
 
-  // Cheap guards before touching the regexp engine.
-  if (value.length !== 13) return false;
-  if (value.charCodeAt(0) !== 0x2b /* '+' */) return false;
+  const isValid = RE_PHONE_PLUS_3_9.test(value);
 
-  return RE_PHONE_PLUS_3_9.test(value);
+  return {
+    type,
+    ok: isValid,
+    message: isValid
+      ? successMessage || MESSAGES.valid[lang]
+      : errorMessage || MESSAGES.invalid[lang],
+  };
 }
-
-export default validatePhoneNumber;

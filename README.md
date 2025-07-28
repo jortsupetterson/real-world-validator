@@ -1,3 +1,7 @@
+# v.1.1.0
+
+Checkbox/boolean validation added
+
 # v 1.0.6
 
 fking comments man, contact me if you know how to avoid this mistake in esbuild
