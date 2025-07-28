@@ -1,4 +1,5 @@
 /**
+ * @preserve
  * @typedef {Object} PhoneNumberField
  * @property {'phoneNumber'}      type            - Field type
  * @property {boolean}            required        - Whether the field is required
@@ -24,7 +25,7 @@ const MESSAGES = {
 
 /**
  * Validates an international phone number in the format +CCCNNNNNNNNN.
- *
+ * @preserve
  * @param {PhoneNumberField}        field - A config Object
  * @param {'fi'|'sv'|'en'}          lang  - Two letter language code
  * @returns {{type: string, ok: boolean, message: string}}

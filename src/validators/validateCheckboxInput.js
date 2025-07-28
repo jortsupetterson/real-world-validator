@@ -1,4 +1,5 @@
 /**
+ * @preserve
  * @typedef {Object} CheckboxInputField
  * @property {'checkboxInput'}     type            - Field type
  * @property {boolean}             required        - Whether the field is required
@@ -21,6 +22,7 @@ const MESSAGES = {
 };
 
 /**
+ * @preserve
  * Validates a checkbox input.
  *
  * @param {CheckboxInputField}        field - A config Object

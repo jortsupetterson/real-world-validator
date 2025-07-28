@@ -1,4 +1,8 @@
-# v.1.1.0
+# v 1.1.1
+
+My dumbass forgot to import the checkbox module
+
+# v 1.1.0
 
 Checkbox/boolean validation added
 

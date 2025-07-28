@@ -1,13 +1,12 @@
 /**
+ * @preserve
  * @typedef {Object} ProperNameField
  * @property {'properName'}        type
  * @property {boolean}             required
  * @property {string}              value
  * @property {string}             [successMessage]
  * @property {string}             [errorMessage]
- */
-
-/**
+ *
  * Validates a proper name according to predefined regex.
  *
  * @param {ProperNameField}          field - A config Object

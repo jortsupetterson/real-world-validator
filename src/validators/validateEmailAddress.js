@@ -1,4 +1,5 @@
 /**
+ * @preserve
  * @typedef {Object} EmailAddressField
  * @property {'emailAddress'}       type
  * @property {boolean}              required

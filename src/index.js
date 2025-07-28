@@ -1,6 +1,7 @@
 import { validateProperName } from "./validators/validateProperName.js";
 import { validateEmailAddress } from "./validators/validateEmailAddress.js";
 import { validatePhoneNumber } from "./validators/validatePhoneNumber.js";
+import { validateCheckboxInput } from "./validators/validateCheckboxInput.js";
 import { sanitizeString, escapeHTML } from "./sanitizers/common.js";
 
 const handlers = {
@@ -13,6 +14,7 @@ const handlers = {
 };
 
 /**
+ * @preserve
  * @param {Rule[]} fields  - Array of validation rules
  * @param {string}  lang    - Two letter language code
  * @returns {Promise<Outcome[]>}

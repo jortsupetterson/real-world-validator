@@ -1,12 +1,11 @@
 /**
+ * @preserve
  * @typedef {Object} SanitizeStringOptions
  * @property {boolean} [trim]               - Remove leading/trailing whitespace
  * @property {boolean} [collapseWhitespace] - Collapse consecutive whitespace into a single space
  * @property {boolean} [stripControls]      - Strip control characters (U+0000–U+001F, U+007F)
  * @property {number}  [maxLen]             - Maximum length of output string
- */
-
-/**
+ *
  * Sanitizes a string input based on provided options.
  *
  * @param {unknown}                   input - Raw input value
@@ -32,6 +31,7 @@ export function sanitizeString(input, opts = {}) {
 }
 
 /**
+ * @preserve
  * Escapes HTML special characters in a string.
  *
  * @param {unknown} input - Raw input value
